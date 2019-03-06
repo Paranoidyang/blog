@@ -19,7 +19,6 @@ router.use(function (req, res, next) {
 
 /*用户注册
 *   注册逻辑：
-*
 *   1、用户名不能为空
 *   2、密码不能为空
 *   3、两次输入的密码必须一致
@@ -74,7 +73,13 @@ router.post('/user/register', function (req, res, next) {
   }).then(function (newUserInfo) {
     console.log('哈哈哈', newUserInfo)
     responseData.message = '注册成功'
+    responseData.userInfo = {
+      _id: newUserInfo.id,
+      username: newUserInfo.username
+    }
+    req.cookies.set('userInfo', JSON.stringify(responseData.userInfo))
     res.json(responseData)
+    return
   })
 })
 
@@ -107,10 +112,19 @@ router.post('/user/login', function(req, res) {
       _id: userInfo.id,
       username: userInfo.username
     }
+    req.cookies.set('userInfo', JSON.stringify(responseData.userInfo))
     res.json(responseData);
     return;
   })
 
 });
+
+/*
+* 退出
+* */
+router.get('/user/logout', function(req, res) {
+  req.cookies.set('userInfo', null);
+  res.json(responseData);
+})
 
 module.exports = router

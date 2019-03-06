@@ -74,15 +74,16 @@
   </div>
 
   <div class="mainRight">
-
-    <div class="rightBox" id="userInfo" style="display: none;">
+    {% if userInfo._id %}
+    <div class="rightBox" id="userInfo">
       <div class="title"><span>用户信息</span></div>
-      <p><span class="colDark username">admin</span></p>
+      <p><span class="colDark">{{userInfo.username}}</span></p>
       <p><span class="colDanger">你好，欢迎光临我的博客！</span></p>
       <p><span class="colDark"><a href="javascript:;" id="logout">退出</a></span></p>
     </div>
+    {% else %}
     <!--登录-->
-    <div class="rightBox" id="loginBox"  style="display: none;">
+    <div class="rightBox" id="loginBox" style="display: none;">
       <div class="title"><span>登录</span></div>
       <div class="line"><span class="colDark">用户名：</span><input name="username" type="text"/><em></em></div>
       <div class="line"><span class="colDark">密码：</span><input name="password" type="password"/><em></em></div>
@@ -104,7 +105,7 @@
       <p class="textRight">已有账号？<a href="javascript:;" class="colMint">马上登录</a>　</p>
       <p class="colWarning textCenter"></p>
     </div>
-
+    {% endif %}
     <div class="rightBox">
       <div class="title"><span>社区</span></div>
       <p><a href="http://www.miaov.com" target="_blank" class="colDanger">妙味课堂</a></p>

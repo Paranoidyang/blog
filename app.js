@@ -10,6 +10,8 @@ var swig = require('swig')
 var mongoose = require('mongoose')
 /*加载body-parse，用来处理post提交过来的数据*/
 var bodyParse = require('body-parser')
+/*加载cookies模块*/
+var Cookies = require('cookies')
 /*创建app应用 =》NodeJs Http.createServer()*/
 var app = express()
 
@@ -29,6 +31,21 @@ swig.setDefaults({
 
 /*border-parse的配置*/
 app.use(bodyParse.urlencoded({extended: true}))
+
+/*cookies的配置*/
+app.use(function (req, res, next) {
+  req.cookies = new Cookies(req, res)
+
+  /*解析登录用户的cookie信息*/
+  req.userInfo = {}
+  if(req.cookies.get('userInfo')) {
+    try {
+      req.userInfo = JSON.parse(req.cookies.get('userInfo'))
+    }catch(e) {}
+  }
+  console.log('app', req.userInfo)
+  next()
+})
 
 /*根据不同功能划分模块*/
 app.use('/admin', require('./routers/admin'))
