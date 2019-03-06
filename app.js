@@ -6,6 +6,10 @@
 var express = require('express')
 /*加载模板处理模块*/
 var swig = require('swig')
+/*加载数据库模块*/
+var mongoose = require('mongoose')
+/*加载body-parse，用来处理post提交过来的数据*/
+var bodyParse = require('body-parser')
 /*创建app应用 =》NodeJs Http.createServer()*/
 var app = express()
 
@@ -23,13 +27,21 @@ swig.setDefaults({
   cache: false
 })
 
-/*路由配置*/
-app.get('/', function (req, res, next) {
-  // res.send('<h1>欢迎光临我的博客</h1>')
-  /*读取views目录下的指定文件，解析并返回给客户端*/
-  res.render('index')
-})
+/*border-parse的配置*/
+app.use(bodyParse.urlencoded({extended: true}))
+
+/*根据不同功能划分模块*/
+app.use('/admin', require('./routers/admin'))
+app.use('/api', require('./routers/api'))
+app.use('/', require('./routers/main'))
 
 
 /*监听http请求*/
-app.listen(8081)
+mongoose.connect('mongodb://localhost:27018/blog', function (err) {
+  if(err) {
+    console.log('数据库连接失败')
+  }else {
+    console.log('数据库连接成功')
+    app.listen(8081)
+  }
+})
