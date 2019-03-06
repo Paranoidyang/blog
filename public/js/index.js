@@ -65,7 +65,14 @@ $(function() {
 
                 if (!result.code) {
                     //登录成功
-                    window.location.reload();
+                    // window.location.reload();
+                  setTimeout(function() {
+                    $loginBox.hide();
+                    $userInfo.show();
+
+                    /*显示登录用户的信息*/
+                    $userInfo.find('.username').html(result.userInfo.username)
+                  }, 1000);
                 }
             }
         })
