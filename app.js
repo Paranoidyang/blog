@@ -15,6 +15,7 @@ var Cookies = require('cookies')
 /*创建app应用 =》NodeJs Http.createServer()*/
 var app = express()
 
+var User = require('./models/User')
 /*设置静态文件托管：当用户访问的url以/public开始，那么直接返回对应的__dirname + '/public'下的文件*/
 app.use('/public', express.static(__dirname + '/public'))
 
@@ -41,10 +42,22 @@ app.use(function (req, res, next) {
   if(req.cookies.get('userInfo')) {
     try {
       req.userInfo = JSON.parse(req.cookies.get('userInfo'))
-    }catch(e) {}
+      /*获取当前用户的类型，判断是否是管理员*/
+      User.findById(req.userInfo._id).then(function (userInfo) {
+        req.userInfo.isAdmin = Boolean(userInfo.isAdmin)
+        next()
+
+      })
+    }catch(e) {
+      next()
+    }
+
+
+
+  } else {
+    next()
   }
-  console.log('app', req.userInfo)
-  next()
+
 })
 
 /*根据不同功能划分模块*/
