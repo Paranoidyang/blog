@@ -17,14 +17,7 @@ router.use(function (req, res, next) {
 
 })
 
-/*用户注册
-*   注册逻辑：
-*   1、用户名不能为空
-*   2、密码不能为空
-*   3、两次输入的密码必须一致
-*
-*   1、用户是否已经被注册（数据库查询）
-* */
+/*注册*/
 router.post('/user/register', function (req, res, next) {
   /*获取post提交过来的数据*/
   var username = req.body.username;
@@ -119,9 +112,7 @@ router.post('/user/login', function(req, res) {
 
 });
 
-/*
-* 退出
-* */
+/*退出*/
 router.get('/user/logout', function(req, res) {
   req.cookies.set('userInfo', null);
   res.json(responseData);

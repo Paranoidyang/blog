@@ -7,6 +7,7 @@ var router = express.Router()
 
 router.get('/', function (req, res, next) {
   console.log('type', req.userInfo)
+  /*传入模板渲染数据userInfo*/
   res.render('main/index', {
     userInfo: req.userInfo
   })
