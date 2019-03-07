@@ -5,12 +5,23 @@
 var express = require('express')
 var router = express.Router()
 
+var Category = require('../models/Category')
+
+
 router.get('/', function (req, res, next) {
-  console.log('type', req.userInfo)
-  /*传入模板渲染数据userInfo*/
-  res.render('main/index', {
-    userInfo: req.userInfo
+
+  /*读取所有的分类请求*/
+  Category.find().then(function (categories) {
+    console.log(categories)
+    res.render('main/index', {
+      userInfo: req.userInfo,
+      categories: categories
+    })
+
+
   })
+
+
 
 })
 
