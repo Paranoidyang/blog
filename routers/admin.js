@@ -7,6 +7,7 @@ var express = require('express')
 var router = express.Router()
 
 var User = require('../models/User')
+var Category = require('../models/Category')
 
 router.use(function(req, res, next) {
   if (!req.userInfo.isAdmin) {
@@ -61,7 +62,6 @@ router.get('/user', function(req, res, next) {
       res.render('admin/user_index', {
         userInfo: req.userInfo,
         users: users,
-
         count: count,
         pages: pages,
         limit: limit,
@@ -74,5 +74,68 @@ router.get('/user', function(req, res, next) {
 
 });
 
+/**
+ * 分类首页
+ */
+router.get('/category', function (req, res, next) {
+  res.render('admin/category_index', {
+    userInfo: req.userInfo
+  })
+
+})
+
+/**
+ * 分类首页
+ */
+router.get('/category/add', function (req, res, next) {
+  res.render('admin/category_add', {
+    userInfo: req.userInfo
+  })
+
+})
+
+/**
+ * 保存分类
+ */
+router.post('/category/add', function (req, res, next) {
+
+  var name = req.body.name || ''
+
+  if(name == '') {
+    res.render('admin/error', {
+      userInfo: req.userInfo,
+      message: '名称不能为空'
+    })
+    return
+  }
+
+  /*判断数据库中是否已经存在同名分类*/
+  Category.findOne({
+    name: name
+  }).then(function (rs) {
+    if(rs) {
+      res.render('admin/error', {
+        userInfo: req.userInfo,
+        message: '分类已经存在了'
+      })
+      return Promise.reject()
+    }else {
+      /*数据库中不存在，保存该分类（save是个对象方法，需要先实例化一个对象才能调用）*/
+      return new Category({
+        name: name
+      }).save()
+
+    }
+
+  }).then(function (newCategory) {
+    res.render('admin/success', {
+      userInfo: req.userInfo,
+      message: '分类保存成功',
+      url: '/admin/category'
+    })
+
+  })
+
+})
 
 module.exports = router
