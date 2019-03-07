@@ -2,7 +2,7 @@
 
 {% block main %}
 <ol class="breadcrumb">
-  <li><a href="/">管理首页</a></li>
+  <li><a href="/admin">管理首页</a></li>
   <li><span>用户列表</span></li>
 </ol>
 
@@ -27,4 +27,7 @@
   {% endfor %}
 
 </table>
+
+{% include 'page.html' %}
+
 {% endblock %}
