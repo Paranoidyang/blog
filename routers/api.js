@@ -142,4 +142,16 @@ router.post('/comment/post', function(req, res) {
   });
 })
 
+/*获取文章的所有评论*/
+router.get('/comment', function(req, res) {
+  var contentId = req.query.contentid || '';
+
+  Content.findOne({
+    _id: contentId
+  }).then(function(content) {
+    responseData.data = content.comments;
+    res.json(responseData);
+  })
+});
+
 module.exports = router
