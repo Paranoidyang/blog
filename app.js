@@ -30,7 +30,7 @@ swig.setDefaults({
   cache: false
 })
 
-/*border-parse的配置*/
+/*body-parse的配置*/
 app.use(bodyParse.urlencoded({extended: true}))
 
 /*cookies的配置*/
@@ -72,6 +72,6 @@ mongoose.connect('mongodb://localhost:27018/blog', function (err) {
     console.log('数据库连接失败')
   }else {
     console.log('数据库连接成功')
-    app.listen(8081)
+    app.listen(80)
   }
 })
