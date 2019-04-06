@@ -1,0 +1,27 @@
+@import "reset";
+@import "variable";
+@import "mixin";
+
+html {
+  font-size: 15px;
+  color: $gray;
+  background: $bg;
+}
+a {
+  color: $gray;
+}
+button {
+  cursor: pointer;
+}
+/*清除浮动*/
+.clear-fix:before,
+.clear-fix:after {
+  display: table;
+  content: " ";
+}
+.clear-fix:after {
+  clear: both;
+}
+.clear-fix{
+  *zoom: 1;
+}

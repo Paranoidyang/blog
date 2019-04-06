@@ -1,57 +1,50 @@
 {%extends 'layout.html'%}
 
 {%block content%}
-  <div class="listBox">
-    <h1>{{content.title}}</h1>
-    <p class="colDefault">
-      作者：<span class="colInfo">{{userInfo.username}}</span> -
-      时间：<span class="colInfo">{{content.addTime|date('Y年m月d日 H:i:s', -8*60)}}</span> -
-      阅读：<span class="colInfo">{{content.views}}</span> -
-      评论：<span class="colInfo">{{content.comments.length}}</span>
-    </p>
-    <dfn>
-      {{content.content}}
-    </dfn>
+  <div class="detail-wrapper">
+    <h1 class="title">{{content.title}}</h1>
+    <div class="article-info clear-fix">
+      <a href="" class="avatar-link"><img class="avatar" src="https://static.woshipm.com/passportAvatar_20170531_102311.jpg?imageView2/1/w/80" alt=""></a>
+      <div class="right-wrapper">
+        <p class="author">行走的仆累</p>
+        <div class="detail-info">
+          <span><i class="i-time"></i>4周前</span>
+          <span><i class="i-eye"></i>431</span>
+          <span><i class="i-comment"></i>9</span>
+        </div>
+      </div>
+      <div class="tag">
+        <i class="i-tag"></i>
+        <span class="name"><a href="">微信小程序</a></span>
+      </div>
+    </div>
+    <div class="content">本质是因为怕被认为无能。期末考试又到了，总有这么一群人，天天说“又是没有复习的一天”“又浪了一天好慌啊”，不学习的氛围让你也放松了紧绷的神经：大家都不复习，整体都考不好也就相当于整体都还不错嘛。结果考完试后，你确实没考好，但这些嚷嚷“没学习”的人们呢？一个个都拿到了高分。这样的情况发生了一次、两次，单元测试、期中考、期末考……而直到后来你才发现，真的没复习的只有你，而那些“虚张声势”的人，都是一边装贪玩，一边在背地里偷偷努力拼命学习的。天呐，何必呢？只是因为彼此是竞争对手，就要用这种方式让别人放松警惕吗？这些“拼命假装不努力”人，到底是怎么想的呢？“不敢说我努力，是因为我怕被看出无能”| 自我价值理论其实拼命假装不努力的人，内心也是紧张和害怕的。如果考试没考好，会有哪些原因？运气不好？不够努力？自己太笨？真实的原因有很多，而拼命假装不努力的学生最怕的是最后一个。从我们小时候，老师就会说“这个孩子脑袋瓜儿挺灵光的，就是不努力”，来为一个孩子欠佳的成绩找理由；而在我们长大之后，自己也会逐渐意识到，承认“自己笨”这件事太残忍了，这威胁到了我们自己存在的价值——拥有在竞争中取得成功的能力。无论是在学校还是在社会的眼光下，“能力”都是我们的核心价值，这个“能力”其实包罗万象，研究者的定义也各不相同，但在生活中说起它时，我们总会认为，这是一种与生俱来的、近乎个人本质的东西，而“笨”，就是对它的否定。我们会竭尽所能维护自己“有能力”的形象——无论自己是否真的有能力。一个每天熬夜才能考到90分的人，和一个整天吃喝玩乐最后轻松考90分的人，谁会被认为是“更有能力”的呢？大部分人都会觉得是后者，甚至老师也会如此。老师们虽然赞扬努力、会帮成绩不够好的学生找到“不努力”的借口，但当一个学生非常努力仍然不够成功时，即便老师不惩罚他，也会在心里“看不起”他[1]：“笨鸟先飞，如果不是笨，他为啥会这么努力”？所以，为了捏造一个“有能力”的形象，有些人就会一边拼命努力，一边又拼命假装不努力了。这样，成功时，他们的成绩就更有价值，让人觉得“他有能力到不复习也能考好”；即便失败了，也能用“没复习”这样的借口打掩护，免得被别人觉得无能。如果把对成功的向往画成纵轴，把对失败的回避画成横轴，那么在这种想法的驱动下，他们就是右上角的矛盾体：一方面渴求成功，一方面惧怕失败，对任务又爱又恨——这种人在科温顿的自我价值理论中被称为是“高驱高避型”的人，俗称“过度努力者”[2]。
+    </div>
   </div>
-  <div class="listBox message">
-  <h3 class="textLeft"><strong>评论</strong> <span class="em">一共有 <em id="messageCount">0</em> 条评论</span></h3>
-
-  {% if userInfo._id %}
-  <p class="textLeft clear">
-    <textarea id="messageContent"></textarea>
-    <input type="hidden" id="contentId" value="{{content.id}}">
-    <button id="messageBtn" class="submit">提交</button>
-  </p>
-  {%else%}
-  <p class="bgDanger" style="line-height: 30px;">你还没有登录，请先登录！</p>
-  {%endif%}
-
-  <div class="messageList">
+  <div class="comment-wrapper">
+    <div class="tip">您有任何问题，都可以提问！</div>
+    {% if userInfo._id %}
+      <textarea class="comment-content" id="messageContent" placeholder="文明社会，理性评论哟~"></textarea>
+      <input type="hidden" id="contentId" value="{{content.id}}">
+      <button id="messageBtn" class="btn-send">发送</button>
+      <!--评论列表-->
+      <ul class="comment-list"></ul>
+      <div class="pager">
+      <ul class="clear">
+        <li class="previous">
+          <a href="">上一页</a>
+        </li>
+        <li></li>
+        <li class="next">
+          <a href="">下一页</a>
+        </li>
+      </ul>
+    </div>
+    {%else%}
+      <textarea class="comment-content" placeholder="文明社会，理性评论哟~"></textarea>
+      <p class="no-login-tip">你还没有登录，请先登录！</p>
+    {%endif%}
   </div>
-
-  <div class="pager">
-    <ul class="clear">
-      <li class="previous">
-        <a href="">上一页</a>
-      </li>
-      <li></li>
-      <li class="next">
-        <a href="">下一页</a>
-      </li>
-    </ul>
-  </div>
-
-  <!--<div class="messageList">-->
-  <!--<div class="messageBox"><p>还没有留言</p></div>-->
-  <!--</div>-->
-
-  <!--<div class="messageList" style="display: block;">-->
-  <!--<div class="messageBox">-->
-  <!--<p class="name clear"><span class="fl">admin</span><span class="fr">2016年07月29日 17:24:01</span></p><p>哈哈</p>-->
-  <!--</div>-->
-  <!--</div>-->
-
-</div>
 
 <script src="/public/js/comment.js"></script>
 {%endblock%}

@@ -1,0 +1,84 @@
+html,
+body,
+div,
+span,
+p,
+a,
+button,
+i,
+em,
+b,
+ul,
+ol,
+li,
+input,
+textarea,
+h1,
+h2,
+h3,
+h4,
+header,
+footer,
+article,
+section,
+nav,
+aside,
+label {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+html {
+  margin: 0 auto;
+  height: 100%;
+}
+
+body {
+  height: 100%;
+}
+
+button {
+  border: none;
+  outline: none;
+  -webkit-appearance: none;
+  padding: 0;
+  border-radius: 0;
+}
+
+i,
+em,
+b {
+  font-style: normal;
+}
+
+b,
+span,
+i,
+label {
+  display: inline-block;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+input {
+  outline: none;
+  background:none;
+  border:0;
+}
+
+button {
+  border: none;
+  outline: none;
+  -webkit-appearance: none;
+  padding: 0;
+  border-radius: 0;
+}
+
+a {
+  text-decoration: none;
+}

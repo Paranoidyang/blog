@@ -67,15 +67,22 @@ function renderComment() {
     }
 
     if (comments.length == 0) {
-        $('.messageList').html('<div class="messageBox"><p>还没有评论</p></div>');
+        $('.comment-list').html('<div class="messageBox"><p>还没有评论</p></div>');
     } else {
         var html = '';
         for (var i=start; i<end; i++) {
-            html += '<div class="messageBox">'+
-                '<p class="name clear"><span class="fl">'+comments[i].username+'</span><span class="fr">'+ formatDate(comments[i].postTime) +'</span></p><p>'+comments[i].content+'</p>'+
-                '</div>';
+            html += '<li class="comment-item">'+
+              '<div class="comment-header">'+
+              '<img class="avatar" src="https://static.woshipm.com/passportAvatar_20170531_102311.jpg?imageView2/1/w/80" alt="">'+
+              '<span class="username">'+comments[i].username+'</span>'+
+              '<span class="time">'+ formatDate(comments[i].postTime) +'</span>'+
+              '</div>'+
+              '<p class="content">'+comments[i].content+'</p>'+
+              '</li>'
+
+
         }
-        $('.messageList').html(html);
+        $('.comment-list').html(html);
     }
 
 }

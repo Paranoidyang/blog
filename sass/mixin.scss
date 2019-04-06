@@ -1,0 +1,5 @@
+/*适配背景图*/
+@mixin bg($url) {
+  background: url($url + '.png') no-repeat;
+  background-size: 100% 100%;
+}

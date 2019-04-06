@@ -1,0 +1,112 @@
+@import "common";
+
+.article-list {
+  background: $white;
+  box-shadow: 0 1px 3px rgba(26,26,26,.1);
+  li {
+    height: 180px;
+    padding: 20px;
+    border-bottom: 1px solid $border;
+    &:hover {
+      background: $bg;
+      .title {
+        color: $black;
+      }
+    }
+    .img-wrapper {
+      position: relative;
+      float: left;
+      width: 215px;
+      margin-right: 20px;
+      img {
+        width: 215px;
+        height: 140px;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 3px;
+      }
+      .tag {
+        position: absolute;
+        left: 15px;
+        top: 15px;
+        background-color: rgba(0,0,0,.5);
+        -webkit-border-radius: 25%;
+        -moz-border-radius: 25%;
+        border-radius: 25%;
+        padding: 4px 10px;
+        color: $white;
+      }
+    }
+    .right-wrapper {
+      float: left;
+      h1 {
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 10px;
+        a {
+          color: $lightBlack;
+        }
+      }
+      .desc {
+        font-size: 14px;
+        color: $gray;
+        width: 445px;
+        height: 66px;      //高度是行高的三倍，必须的，兼容部分浏览器
+        line-height: 22px;
+        overflow:hidden;
+        text-overflow:ellipsis;
+        display:-webkit-box;
+        -webkit-line-clamp:3;
+        -webkit-box-orient:vertical;
+      }
+      .footer {
+        height: 32px;
+        //line-height: 32px;
+        margin-top: 10px;
+        .user-info {
+          float: left;
+          display: table;
+          .avatar-link {
+            margin-right: 10px;
+            width: 32px;
+            height: 100%;
+            img {
+              width: 32px;
+              height: 32px;
+              -webkit-border-radius: 50%;
+              -moz-border-radius: 50%;
+              border-radius: 50%;
+            }
+          }
+          .username {
+            padding-right: 10px;
+          }
+          .username,
+          .time {
+            display: table-cell;
+            vertical-align: middle;
+          }
+        }
+        .article-info {
+          float: right;
+          margin-top: 8px;
+          .views {
+            margin-right: 10px;
+          }
+          i {
+            width: 14px;
+            height: 14px;
+            vertical-align: middle;
+            margin-right: 2px;
+          }
+          .i-eye {
+            @include bg('../images/eye')
+          }
+          .i-comment {
+            @include bg('../images/comment')
+          }
+        }
+      }
+    }
+  }
+}

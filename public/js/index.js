@@ -9,19 +9,20 @@ $(function () {
   var $registerBox = $('#registerBox')
 
   /*切换到注册面板*/
-  $loginBox.find('a.colMint').on('click', function () {
+  $loginBox.find('a.register').on('click', function () {
     $registerBox.show()
     $loginBox.hide()
   })
 
   /*切换到登录面板*/
-  $registerBox.find('a.colMint').on('click', function () {
+  $registerBox.find('a.login').on('click', function () {
     $loginBox.show()
     $registerBox.hide()
   })
 
   /*注册*/
   $registerBox.find('button').on('click', function () {
+    $registerBox.find('.btn-register').html('注册中...')
     //通过ajax提交请求
     $.ajax({
       type: 'post',
@@ -34,7 +35,7 @@ $(function () {
       dataType: 'json',
       success: function (result) {
         console.log(result)
-        $registerBox.find('.colWarning').html(result.message)
+        // $registerBox.find('.colWarning').html(result.message)
 
         if (!result.code) {
           //注册成功
@@ -47,6 +48,7 @@ $(function () {
 
   /*登录*/
   $loginBox.find('button').on('click', function () {
+    $loginBox.find('.btn-login').html('登录中...')
     //通过ajax提交请求
     $.ajax({
       type: 'post',
@@ -57,7 +59,7 @@ $(function () {
       },
       dataType: 'json',
       success: function (result) {
-        $loginBox.find('.colWarning').html(result.message)
+        // $loginBox.find('.colWarning').html(result.message)
         console.log('登录成功')
         if (!result.code) {
           //登录成功
