@@ -167,7 +167,6 @@ main {
           top: 8px;
           right: 25px;
           cursor: pointer;
-          //background: url(../images/close.png) no-repeat center center;
           background-size: 80% 80%;
         }
         span {
@@ -295,6 +294,7 @@ footer {
   line-height: 79px;
   border-top: 1px solid $black;
   color: $lightBlack;
+  text-align: center;
 }
 
 
